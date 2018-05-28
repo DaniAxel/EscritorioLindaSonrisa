@@ -52,8 +52,6 @@ public class registroTrabajador extends javax.swing.JFrame {
         t_dir = new javax.swing.JTextField();
         t_tel = new javax.swing.JTextField();
         t_tip = new javax.swing.JTextField();
-        rdSexoH = new javax.swing.JRadioButton();
-        rdSexoM = new javax.swing.JRadioButton();
         btnRegistrar = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -66,6 +64,7 @@ public class registroTrabajador extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         btnSalir = new javax.swing.JButton();
         t_contra = new javax.swing.JTextField();
+        txtSexo = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -129,19 +128,6 @@ public class registroTrabajador extends javax.swing.JFrame {
             }
         });
         jPanel1.add(t_tip, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 110, 113, -1));
-
-        buttonGroup1.add(rdSexoH);
-        rdSexoH.setText("Hombre");
-        rdSexoH.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdSexoHActionPerformed(evt);
-            }
-        });
-        jPanel1.add(rdSexoH, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 300, -1, -1));
-
-        buttonGroup1.add(rdSexoM);
-        rdSexoM.setText("Mujer");
-        jPanel1.add(rdSexoM, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 300, -1, -1));
 
         btnRegistrar.setText("Registrar");
         btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
@@ -208,6 +194,13 @@ public class registroTrabajador extends javax.swing.JFrame {
         });
         jPanel1.add(t_contra, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 70, 90, -1));
 
+        txtSexo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSexoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtSexo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 290, 110, -1));
+
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/mfOAU8I.jpg"))); // NOI18N
         jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 400));
 
@@ -260,7 +253,7 @@ public class registroTrabajador extends javax.swing.JFrame {
 
         Conexion cc = new Conexion();
         Connection cn = cc.getConexion();
-        String rut, nombre, correo, direccion, contraseña, especialidad, fechaNacimiento, telefono, tipoTrabajador;
+        String rut, nombre, correo,sexo,  direccion, contraseña, especialidad, fechaNacimiento, telefono, tipoTrabajador;
         String sql;
         rut = t_rut.getText();
         nombre = t_nom.getText();
@@ -269,6 +262,7 @@ public class registroTrabajador extends javax.swing.JFrame {
         contraseña = t_contra.getText();
         especialidad = t_esp.getText();
         fechaNacimiento = t_fech.getText();
+        sexo=txtSexo.getText();
         telefono = t_tel.getText();
         tipoTrabajador = t_tip.getText();
         sql = "insert into trabajador(rut, nombre, fecha_nacimiento, sexo, correo, direccion, telefono, contraseña, tipo, especialidad) values"
@@ -278,6 +272,7 @@ public class registroTrabajador extends javax.swing.JFrame {
             pd.setString(1, rut);
             pd.setString(2, nombre);
             pd.setString(3, fechaNacimiento);
+            pd.setString(4, sexo);
             pd.setString(5, correo);
             pd.setString(6, direccion);
             pd.setString(7, telefono);
@@ -301,9 +296,9 @@ public class registroTrabajador extends javax.swing.JFrame {
         t_contra.transferFocus();        // TODO add your handling code here:
     }//GEN-LAST:event_t_contraActionPerformed
 
-    private void rdSexoHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdSexoHActionPerformed
-        buttonGroup1.getSelection();        // TODO add your handling code here:
-    }//GEN-LAST:event_rdSexoHActionPerformed
+    private void txtSexoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSexoActionPerformed
+    txtSexo.transferFocus();        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSexoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -318,7 +313,7 @@ public class registroTrabajador extends javax.swing.JFrame {
         t_tip.setText("");
         t_fech.setText("");
         t_contra.setText("");
-        rdSexoH.isSelected();
+        txtSexo.setText("");
 
     }
 
@@ -329,6 +324,7 @@ public class registroTrabajador extends javax.swing.JFrame {
         t_corr.setEnabled(false);
         t_esp.setEnabled(false);
         t_tel.setEnabled(false);
+        txtSexo.setEnabled(false);
         t_tip.setEnabled(false);
         t_fech.setEnabled(false);
         t_contra.setEnabled(false);
@@ -339,6 +335,7 @@ public class registroTrabajador extends javax.swing.JFrame {
     public void desbloquear() {
         t_rut.setEnabled(true);
         t_nom.setEnabled(true);
+        txtSexo.setEnabled(true);
         t_dir.setEnabled(true);
         t_corr.setEnabled(true);
         t_esp.setEnabled(true);
@@ -401,8 +398,6 @@ public class registroTrabajador extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JRadioButton rdSexoH;
-    private javax.swing.JRadioButton rdSexoM;
     private javax.swing.JTextField t_contra;
     private javax.swing.JTextField t_corr;
     private javax.swing.JTextField t_dir;
@@ -412,5 +407,6 @@ public class registroTrabajador extends javax.swing.JFrame {
     private javax.swing.JTextField t_rut;
     private javax.swing.JTextField t_tel;
     private javax.swing.JTextField t_tip;
+    private javax.swing.JTextField txtSexo;
     // End of variables declaration//GEN-END:variables
 }
