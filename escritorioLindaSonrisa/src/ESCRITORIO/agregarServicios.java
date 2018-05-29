@@ -7,9 +7,11 @@ package ESCRITORIO;
 
 import BBDD.Conexion;
 import DAO_IMP.ServicioDaoImp;
+import DTO.ServicioDto;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.control.CheckBox;
 import javax.swing.JOptionPane;
 
 /**
@@ -47,8 +49,7 @@ public class agregarServicios extends javax.swing.JFrame {
         btnNuevo = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         t_descripcion = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        txtHabilitado = new javax.swing.JTextField();
+        chkHab = new javax.swing.JCheckBox();
         jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -112,9 +113,13 @@ public class agregarServicios extends javax.swing.JFrame {
         });
         getContentPane().add(t_descripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(146, 185, 318, -1));
 
-        jLabel7.setText("Habilitado");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, -1, -1));
-        getContentPane().add(txtHabilitado, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 230, 20, -1));
+        chkHab.setText("Habilitado");
+        chkHab.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkHabActionPerformed(evt);
+            }
+        });
+        getContentPane().add(chkHab, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 80, -1, -1));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/mfOAU8I.jpg"))); // NOI18N
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 590, -1));
@@ -124,6 +129,7 @@ public class agregarServicios extends javax.swing.JFrame {
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
         desbloquear();
+        limpiar();
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -146,35 +152,32 @@ public class agregarServicios extends javax.swing.JFrame {
 
         
       
-        Conexion cc = new Conexion();
-        Connection cn = cc.getConexion();
-        String nom, descri;
-        int precio,habilitado;
-        String sql;
-        nom = t_noms.getText();
-        descri = t_descripcion.getText();
-        precio = Integer.parseInt(t_precio.getText());
-        habilitado=Integer.parseInt(txtHabilitado.getText());
         
-        sql = "insert into servicio(nombre, descripcion, precio,habilitado) values(?,?,?,?)";
-        try {
-            PreparedStatement pd = cn.prepareStatement(sql);
-            pd.setString(1, nom);
-            pd.setString(2, descri);
-            pd.setInt(3, precio);
-            pd.setInt(4, habilitado);
-            
-            int n=pd.executeUpdate();
-            if(n>0){
-                JOptionPane.showMessageDialog(null, "Registro Guardado");
-            }else{
-                JOptionPane.showMessageDialog(null, "No se guardo el registro guardar Registro");
-            }
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(agregarServicios.class.getName()).log(Level.SEVERE, null, ex);
+
+ServicioDto dto= new ServicioDto();
+        ServicioDaoImp dao= new ServicioDaoImp();
+        dto.setNombre(t_noms.getText());
+        dto.setPrecio(Integer.parseInt(t_precio.getText()));
+        dto.setDescripcion(t_descripcion.getText());
+        if(chkHab.isSelected()){
+            dto.setHabilitado(true);
+        }else{
+            dto.setHabilitado(false);
         }
+        
+        if(dao.agregar(dto)){
+            JOptionPane.showMessageDialog(null,"Error al agregar");
+        }else{
+            JOptionPane.showMessageDialog(null, "Se agrego correctamente");
+        }
+
+
+        
     }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void chkHabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkHabActionPerformed
+    chkHab.transferFocus();        // TODO add your handling code here:
+    }//GEN-LAST:event_chkHabActionPerformed
 
     /**
      * @param args the command line arguments
@@ -183,11 +186,12 @@ public class agregarServicios extends javax.swing.JFrame {
         t_noms.setText("");
         t_precio.setText("");
         t_descripcion.setText("");
+        chkHab.setSelected(false);
     }
 
     public void bloquear() {
-        txtHabilitado.setEnabled(false);
         t_noms.setEnabled(false);
+        chkHab.setEnabled(false);
         t_precio.setEnabled(false);
         t_descripcion.setEnabled(false);
         btnAgregar.setEnabled(false);
@@ -195,12 +199,12 @@ public class agregarServicios extends javax.swing.JFrame {
     }
 
     public void desbloquear() {
-        txtHabilitado.setEnabled(true);
         t_noms.setEnabled(true);
+        chkHab.setEnabled(true);
         t_precio.setEnabled(true);
         t_descripcion.setEnabled(true);
         btnAgregar.setEnabled(true);
-        btnNuevo.setEnabled(false);
+        btnNuevo.setEnabled(true);
     }
 
     public static void main(String args[]) {
@@ -238,16 +242,15 @@ public class agregarServicios extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnNuevo;
+    private javax.swing.JCheckBox chkHab;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JTextField t_descripcion;
     private javax.swing.JTextField t_noms;
     private javax.swing.JTextField t_precio;
-    private javax.swing.JTextField txtHabilitado;
     // End of variables declaration//GEN-END:variables
 }

@@ -9,7 +9,7 @@ public class TrabajadorDto {
     
     private String rut;//PK
     private String nombre;
-    private java.util.Date fechaNacimiento;
+    private Date fechaNacimiento;
     private String sexo;
     private String correo;
     private String direccion;

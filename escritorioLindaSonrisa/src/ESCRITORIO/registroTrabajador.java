@@ -6,9 +6,14 @@
 package ESCRITORIO;
 
 import BBDD.Conexion;
+import DAO_IMP.TrabajadorDaoImp;
+import DTO.TrabajadorDto;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -58,13 +63,14 @@ public class registroTrabajador extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         t_esp = new javax.swing.JTextField();
         t_corr = new javax.swing.JTextField();
-        t_fech = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         btnNuevo = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         btnSalir = new javax.swing.JButton();
         t_contra = new javax.swing.JTextField();
         txtSexo = new javax.swing.JTextField();
+        tNacimiento = new com.toedter.calendar.JDateChooser();
+        chkHab = new javax.swing.JCheckBox();
         jLabel12 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -92,7 +98,7 @@ public class registroTrabajador extends javax.swing.JFrame {
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 120, -1, -1));
 
         jLabel7.setText("Sexo");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, -1, -1));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, -1, -1));
 
         t_rut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -159,13 +165,6 @@ public class registroTrabajador extends javax.swing.JFrame {
             }
         });
         jPanel1.add(t_corr, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 250, 113, -1));
-
-        t_fech.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                t_fechActionPerformed(evt);
-            }
-        });
-        jPanel1.add(t_fech, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 200, 113, -1));
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 46, 417, 10));
 
         btnNuevo.setText("Nuevo");
@@ -200,6 +199,15 @@ public class registroTrabajador extends javax.swing.JFrame {
             }
         });
         jPanel1.add(txtSexo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 290, 110, -1));
+        jPanel1.add(tNacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 200, -1, -1));
+
+        chkHab.setText("Habilitado");
+        chkHab.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkHabActionPerformed(evt);
+            }
+        });
+        jPanel1.add(chkHab, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 260, -1, -1));
 
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/mfOAU8I.jpg"))); // NOI18N
         jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 400));
@@ -237,12 +245,9 @@ public class registroTrabajador extends javax.swing.JFrame {
         t_corr.transferFocus();        // TODO add your handling code here:
     }//GEN-LAST:event_t_corrActionPerformed
 
-    private void t_fechActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_t_fechActionPerformed
-        t_fech.transferFocus();        // TODO add your handling code here:
-    }//GEN-LAST:event_t_fechActionPerformed
-
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
-        desbloquear();        // TODO add your handling code here:
+        desbloquear();
+        limpiar();// TODO add your handling code here:
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
@@ -251,43 +256,32 @@ public class registroTrabajador extends javax.swing.JFrame {
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
 
-        Conexion cc = new Conexion();
-        Connection cn = cc.getConexion();
-        String rut, nombre, correo,sexo,  direccion, contraseña, especialidad, fechaNacimiento, telefono, tipoTrabajador;
-        String sql;
-        rut = t_rut.getText();
-        nombre = t_nom.getText();
-        correo = t_corr.getText();
-        direccion = t_dir.getText();
-        contraseña = t_contra.getText();
-        especialidad = t_esp.getText();
-        fechaNacimiento = t_fech.getText();
-        sexo=txtSexo.getText();
-        telefono = t_tel.getText();
-        tipoTrabajador = t_tip.getText();
-        sql = "insert into trabajador(rut, nombre, fecha_nacimiento, sexo, correo, direccion, telefono, contraseña, tipo, especialidad) values"
-                + "(?,?,?,?,?,?,?,?,?,?)";
-        try {
-            PreparedStatement pd = cn.prepareStatement(sql);
-            pd.setString(1, rut);
-            pd.setString(2, nombre);
-            pd.setString(3, fechaNacimiento);
-            pd.setString(4, sexo);
-            pd.setString(5, correo);
-            pd.setString(6, direccion);
-            pd.setString(7, telefono);
-            pd.setString(8, contraseña);
-            pd.setString(9, tipoTrabajador);
-            pd.setString(10, especialidad);
-            
-            int n=pd.executeUpdate();
-            if(n>0){
-                JOptionPane.showMessageDialog(null, "Se agrego correctamente");
-            }else{
-                JOptionPane.showMessageDialog(null, "no se pudo agregar");
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(registroTrabajador.class.getName()).log(Level.SEVERE, null, ex);
+        TrabajadorDto tr = new TrabajadorDto();
+        TrabajadorDaoImp dao = new TrabajadorDaoImp();
+        tr.setRut(t_rut.getText());
+        tr.setNombre(t_nom.getText());
+        tr.setCorreo(t_corr.getText());
+        tr.setDireccion(t_dir.getText());
+        tr.setTelefono(t_tel.getText());
+        tr.setEspecialidad(t_esp.getText());
+        SimpleDateFormat formato= new SimpleDateFormat("dd/mm/yy");
+        Calendar cal= Calendar.getInstance();
+        Date a=cal.getTime();
+        tr.setFechaNacimiento(a));
+        tr.setTipo(t_tip.getText());
+        tr.setContrasenia(t_contra.getText());
+        tr.setSexo(txtSexo.getText());
+        if (chkHab.isSelected()) {
+            tr.setHabilitado(true);
+        } else {
+            tr.setHabilitado(false);
+        }
+
+        if (dao.agregar(tr)) {
+            JOptionPane.showMessageDialog(null, "Error al agregar al trabajador");
+        } else {
+            JOptionPane.showMessageDialog(null, "Exito al agregar el Trabajador");
+
         }
 
     }//GEN-LAST:event_btnRegistrarActionPerformed
@@ -297,8 +291,12 @@ public class registroTrabajador extends javax.swing.JFrame {
     }//GEN-LAST:event_t_contraActionPerformed
 
     private void txtSexoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSexoActionPerformed
-    txtSexo.transferFocus();        // TODO add your handling code here:
+        txtSexo.transferFocus();        // TODO add your handling code here:
     }//GEN-LAST:event_txtSexoActionPerformed
+
+    private void chkHabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkHabActionPerformed
+        chkHab.transferFocus();        // TODO add your handling code here:
+    }//GEN-LAST:event_chkHabActionPerformed
 
     /**
      * @param args the command line arguments
@@ -311,9 +309,10 @@ public class registroTrabajador extends javax.swing.JFrame {
         t_esp.setText("");
         t_tel.setText("");
         t_tip.setText("");
-        t_fech.setText("");
         t_contra.setText("");
         txtSexo.setText("");
+        chkHab.setSelected(false);
+        tNacimiento.setCalendar(null);
 
     }
 
@@ -326,10 +325,11 @@ public class registroTrabajador extends javax.swing.JFrame {
         t_tel.setEnabled(false);
         txtSexo.setEnabled(false);
         t_tip.setEnabled(false);
-        t_fech.setEnabled(false);
         t_contra.setEnabled(false);
         btnNuevo.setEnabled(true);
         btnRegistrar.setEnabled(false);
+        tNacimiento.setEnabled(false);
+        chkHab.setEnabled(false);
     }
 
     public void desbloquear() {
@@ -342,9 +342,10 @@ public class registroTrabajador extends javax.swing.JFrame {
         t_tel.setEnabled(true);
         t_tip.setEnabled(true);
         t_contra.setEnabled(true);
-        t_fech.setEnabled(true);
         btnRegistrar.setEnabled(true);
-        btnNuevo.setEnabled(false);
+        btnNuevo.setEnabled(true);
+        tNacimiento.setEnabled(true);
+        chkHab.setEnabled(true);
     }
 
     public static void main(String args[]) {
@@ -384,6 +385,7 @@ public class registroTrabajador extends javax.swing.JFrame {
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JButton btnSalir;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JCheckBox chkHab;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -398,11 +400,11 @@ public class registroTrabajador extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
+    private com.toedter.calendar.JDateChooser tNacimiento;
     private javax.swing.JTextField t_contra;
     private javax.swing.JTextField t_corr;
     private javax.swing.JTextField t_dir;
     private javax.swing.JTextField t_esp;
-    private javax.swing.JTextField t_fech;
     private javax.swing.JTextField t_nom;
     private javax.swing.JTextField t_rut;
     private javax.swing.JTextField t_tel;

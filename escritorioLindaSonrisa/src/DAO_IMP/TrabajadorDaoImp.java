@@ -53,7 +53,7 @@ public class TrabajadorDaoImp implements ITrabajadorDao {
             PreparedStatement sql = connection.prepareStatement(query);
             sql.setString(1, trabajador.getRut());
             sql.setString(2, trabajador.getNombre());
-            sql.setDate(3, (Date) trabajador.getFechaNacimiento());
+            sql.setDate(3, (java.sql.Date)trabajador.getFechaNacimiento());
             sql.setString(4, trabajador.getSexo());
             sql.setString(5, trabajador.getCorreo());
             sql.setString(6, trabajador.getDireccion());
