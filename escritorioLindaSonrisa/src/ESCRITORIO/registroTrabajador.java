@@ -11,12 +11,16 @@ import DTO.TrabajadorDto;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import oracle.net.aso.d;
 
 /**
  *
@@ -69,8 +73,8 @@ public class registroTrabajador extends javax.swing.JFrame {
         btnSalir = new javax.swing.JButton();
         t_contra = new javax.swing.JTextField();
         txtSexo = new javax.swing.JTextField();
-        tNacimiento = new com.toedter.calendar.JDateChooser();
         chkHab = new javax.swing.JCheckBox();
+        Dat = new com.toedter.calendar.JDateChooser();
         jLabel12 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -199,7 +203,6 @@ public class registroTrabajador extends javax.swing.JFrame {
             }
         });
         jPanel1.add(txtSexo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 290, 110, -1));
-        jPanel1.add(tNacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 200, -1, -1));
 
         chkHab.setText("Habilitado");
         chkHab.addActionListener(new java.awt.event.ActionListener() {
@@ -208,6 +211,9 @@ public class registroTrabajador extends javax.swing.JFrame {
             }
         });
         jPanel1.add(chkHab, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 260, -1, -1));
+
+        Dat.setDateFormatString("dd-mm-yyyy");
+        jPanel1.add(Dat, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 200, -1, -1));
 
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/mfOAU8I.jpg"))); // NOI18N
         jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 400));
@@ -258,31 +264,31 @@ public class registroTrabajador extends javax.swing.JFrame {
 
         TrabajadorDto tr = new TrabajadorDto();
         TrabajadorDaoImp dao = new TrabajadorDaoImp();
+
         tr.setRut(t_rut.getText());
         tr.setNombre(t_nom.getText());
         tr.setCorreo(t_corr.getText());
         tr.setDireccion(t_dir.getText());
         tr.setTelefono(t_tel.getText());
         tr.setEspecialidad(t_esp.getText());
-        SimpleDateFormat formato= new SimpleDateFormat("dd/mm/yy");
-        Calendar cal= Calendar.getInstance();
-        Date a=cal.getTime();
-        tr.setFechaNacimiento(a));
         tr.setTipo(t_tip.getText());
         tr.setContrasenia(t_contra.getText());
         tr.setSexo(txtSexo.getText());
+        java.util.Date utilDate = Dat.getDate();
+        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+        tr.setFechaNacimiento(sqlDate);
         if (chkHab.isSelected()) {
             tr.setHabilitado(true);
         } else {
             tr.setHabilitado(false);
-        }
 
+        }
         if (dao.agregar(tr)) {
-            JOptionPane.showMessageDialog(null, "Error al agregar al trabajador");
-        } else {
-            JOptionPane.showMessageDialog(null, "Exito al agregar el Trabajador");
+                JOptionPane.showMessageDialog(null, "Error al agregar al trabajador");
+            } else {
+                JOptionPane.showMessageDialog(null, "Exito al agregar el Trabajador");
 
-        }
+            }
 
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
@@ -312,7 +318,7 @@ public class registroTrabajador extends javax.swing.JFrame {
         t_contra.setText("");
         txtSexo.setText("");
         chkHab.setSelected(false);
-        tNacimiento.setCalendar(null);
+        Dat.setCalendar(null);
 
     }
 
@@ -328,7 +334,7 @@ public class registroTrabajador extends javax.swing.JFrame {
         t_contra.setEnabled(false);
         btnNuevo.setEnabled(true);
         btnRegistrar.setEnabled(false);
-        tNacimiento.setEnabled(false);
+        Dat.setEnabled(false);
         chkHab.setEnabled(false);
     }
 
@@ -344,7 +350,7 @@ public class registroTrabajador extends javax.swing.JFrame {
         t_contra.setEnabled(true);
         btnRegistrar.setEnabled(true);
         btnNuevo.setEnabled(true);
-        tNacimiento.setEnabled(true);
+        Dat.setEnabled(true);
         chkHab.setEnabled(true);
     }
 
@@ -381,6 +387,7 @@ public class registroTrabajador extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.toedter.calendar.JDateChooser Dat;
     private javax.swing.JButton btnNuevo;
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JButton btnSalir;
@@ -400,7 +407,6 @@ public class registroTrabajador extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
-    private com.toedter.calendar.JDateChooser tNacimiento;
     private javax.swing.JTextField t_contra;
     private javax.swing.JTextField t_corr;
     private javax.swing.JTextField t_dir;

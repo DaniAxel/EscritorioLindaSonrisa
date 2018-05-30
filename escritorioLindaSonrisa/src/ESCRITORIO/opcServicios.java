@@ -31,6 +31,9 @@ public class opcServicios extends javax.swing.JFrame {
         btnAgregarSer = new javax.swing.JButton();
         btnEliminarServ = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
+        btnHab = new javax.swing.JButton();
+        btnElim = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -61,6 +64,25 @@ public class opcServicios extends javax.swing.JFrame {
         });
         getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 250, -1, -1));
 
+        btnHab.setText("Habilitar Servicios");
+        btnHab.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHabActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnHab, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 100, 150, -1));
+
+        btnElim.setText("Eliminar Servicios");
+        btnElim.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnElimActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnElim, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, -1, -1));
+
+        jLabel2.setText("Servicios");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 40, -1, -1));
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/mfOAU8I.jpg"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 590, 370));
 
@@ -80,6 +102,16 @@ public class opcServicios extends javax.swing.JFrame {
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
      this.dispose();   // TODO add your handling code here:
     }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void btnHabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHabActionPerformed
+    habilitarServicio ss=new habilitarServicio();
+    ss.setVisible(true);// TODO add your handling code here:
+    }//GEN-LAST:event_btnHabActionPerformed
+
+    private void btnElimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnElimActionPerformed
+    eliminarServicios sr=new eliminarServicios();
+    sr.setVisible(true);// TODO add your handling code here:
+    }//GEN-LAST:event_btnElimActionPerformed
 
     /**
      * @param args the command line arguments
@@ -118,8 +150,11 @@ public class opcServicios extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregarSer;
+    private javax.swing.JButton btnElim;
     private javax.swing.JButton btnEliminarServ;
+    private javax.swing.JButton btnHab;
     private javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }

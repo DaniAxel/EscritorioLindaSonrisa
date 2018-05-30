@@ -6,6 +6,8 @@
 package ESCRITORIO;
 
 import BBDD.Conexion;
+import DAO_IMP.TrabajadorDaoImp;
+import DTO.TrabajadorDto;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -29,6 +31,7 @@ public class DeshabilitarTrabajador extends javax.swing.JFrame {
      * Creates new form DeshabilitarTrabajador
      */
     public DeshabilitarTrabajador() {
+
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -91,10 +94,10 @@ public class DeshabilitarTrabajador extends javax.swing.JFrame {
 
         tableResult.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Rut", "Nombre", "Correo", "Fecha_Nacimiento", "Telefono", "Tipo Trabajador"
+                "RUT", "NOMBRE", "CORREO", "FECHA_NACIMIENTO", "TELEFONO", "TIPO TRABAJADOR"
             }
         ) {
             Class[] types = new Class [] {
@@ -150,25 +153,16 @@ public class DeshabilitarTrabajador extends javax.swing.JFrame {
 
     private void btnDeshabilitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeshabilitarActionPerformed
 
-        Conexion cn = new Conexion();
-        Connection cc = cn.getConexion();
+        TrabajadorDto dto = new TrabajadorDto();
+        TrabajadorDaoImp dao = new TrabajadorDaoImp();
 
-        String rut =txtRut.getText();
-        String sql;
+        dto.setRut(txtRut.getText());
 
-        sql = "delete from trabajador where rut=? ";
-        try {
-            PreparedStatement st = cc.prepareStatement(sql);
-            
-            st.setString(1, rut);
-            int n= st.executeUpdate();
-            if(n>0){
-                JOptionPane.showMessageDialog(null, "Se elimino correctamete");
-            }else{
-                JOptionPane.showMessageDialog(null, "Error al eliminar");
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(DeshabilitarTrabajador.class.getName()).log(Level.SEVERE, null, ex);
+        if (dao.deshabilitar(dto)) {
+            JOptionPane.showMessageDialog(null, "Exito al deshabilitar");
+        } else {
+            JOptionPane.showMessageDialog(null, "Error al deshabilitar");
+
         }
     }//GEN-LAST:event_btnDeshabilitarActionPerformed
 
@@ -176,30 +170,19 @@ public class DeshabilitarTrabajador extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public void verificar() {
-        Conexion cc = new Conexion();
-        Connection cn = cc.getConexion();
-        DefaultTableModel sm = new DefaultTableModel();
-        tabla = this.tableResult;
+      
 
-        tabla.setModel(sm);
+        TrabajadorDto dto = new TrabajadorDto();
+        TrabajadorDaoImp dao = new TrabajadorDaoImp();
+        dto.setRut(txtRut.getText());
 
-        String rut;
-        String sql;
-        rut = txtRut.getText();
-        sql = "select * from trabajador where rut=?";
-        try {
-            PreparedStatement n = cn.prepareStatement(sql);
+        if (dao.buscars(dto)) {
+            JOptionPane.showMessageDialog(null, dto.toString());
+        } else {
+            JOptionPane.showMessageDialog(null, "Error");
 
-            n.setString(1, rut);
-            ResultSet rs = n.executeQuery();
-
-            while (rs.next()) {
-                sm.addRow(new Object[]{rs.getString("rut"), rs.getString("nombre"), rs.getString("correo"), rs.getString("fecha_nacimiento"), rs.getString("telefono"), rs.getString("tipo")});
-            }
-
-        } catch (SQLException ex) {
-            Logger.getLogger(DeshabilitarTrabajador.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
 
     public static void main(String args[]) {

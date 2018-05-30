@@ -8,8 +8,8 @@ import DTO.ServicioDto;
  */
 public interface IServicioDao extends IBaseDao<ServicioDto> {
 
-    public boolean deshabilitar(ServicioDto obj);
+    public boolean deshabilitar(String obj);
     
-    public boolean habilitar(ServicioDto obj);
+    public boolean habilitar(String obj);
     
 }

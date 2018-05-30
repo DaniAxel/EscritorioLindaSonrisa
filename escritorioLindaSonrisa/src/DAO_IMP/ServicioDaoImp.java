@@ -20,11 +20,11 @@ public class ServicioDaoImp implements IServicioDao {
     private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(Principal.class);
 
     @Override
-    public boolean deshabilitar(ServicioDto obj) {
-        String query = "UPDATE servicio SET habilitado=0 WHERE id_servicio=?";
+    public boolean deshabilitar(String obj) {
+        String query = "UPDATE servicio SET habilitado=0 WHERE nombre=?";
         try (Connection conexion = Conexion.getConexion()) {
             PreparedStatement sql = conexion.prepareStatement(query);
-            sql.setInt(1, obj.getIdServicio());
+            sql.setString(1, obj);
             if (sql.executeUpdate() == 1) {
                 conexion.close();
                 return true;
@@ -126,11 +126,11 @@ public class ServicioDaoImp implements IServicioDao {
     }
 
     @Override
-    public boolean habilitar(ServicioDto obj) {
-        String query = "UPDATE servicio SET habilitado=1 WHERE id_servicio=?";
+    public boolean habilitar(String obj) {
+        String query = "UPDATE servicio SET habilitado=1 WHERE nombre=?";
         try (Connection conexion = Conexion.getConexion()) {
             PreparedStatement sql = conexion.prepareStatement(query);
-            sql.setInt(1, obj.getIdServicio());
+            sql.setString(1, obj);
             if (sql.executeUpdate() == 1) {
                 conexion.close();
                 return true;
@@ -139,6 +139,44 @@ public class ServicioDaoImp implements IServicioDao {
             log.error("Error SQL habilitando servicio " + s.getMessage());
         } catch (Exception e) {
             log.error("Error al habilitando servicio " + e.getMessage());
+        }
+        return false;
+    }
+
+    public ArrayList<String> listarNombres() {
+        String query = "SELECT * FROM servicio ";
+        ArrayList<String> list = new ArrayList<String>();
+        try (Connection conexion = Conexion.getConexion()) {
+            PreparedStatement sql = conexion.prepareStatement(query);
+            ResultSet result = sql.executeQuery();
+            while (result.next()) {
+                list.add(result.getString("nombre"));
+            }
+        } catch (SQLException s) {
+            log.error("Error SQL listando todos servicio " + s.getMessage());
+        } catch (Exception e) {
+            log.error("Error al listando todos servicio " + e.getMessage());
+        }
+        return list;
+
+    }
+
+    public boolean eliminar(String nombre) {
+        String query = "delete from servicio where nombre=?";
+        try (Connection conexion = Conexion.getConexion()) {
+
+            PreparedStatement sql = conexion.prepareCall(query);
+            sql.setString(1, nombre);
+            if (sql.executeUpdate() > 0) {
+                conexion.close();
+                return true;
+            }
+        } catch (SQLException ex) {
+            log.error("Error SQL Eliminando todos servicio " + ex.getMessage());
+
+        } catch (Exception e) {
+            log.error("Error SQL Eliminar todos servicio " + e.getMessage());
+
         }
         return false;
     }

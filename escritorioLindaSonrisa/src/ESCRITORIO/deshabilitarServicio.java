@@ -5,6 +5,11 @@
  */
 package ESCRITORIO;
 
+import DAO_IMP.ServicioDaoImp;
+import DTO.ServicioDto;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Axel
@@ -17,6 +22,14 @@ public class deshabilitarServicio extends javax.swing.JFrame {
     public deshabilitarServicio() {
         initComponents();
         this.setLocationRelativeTo(null);
+        cServi.removeAllItems();
+        ServicioDaoImp dao = new ServicioDaoImp();
+        ArrayList<String> lista = new ArrayList<String>();
+        lista = dao.listarNombres();
+        for (int i = 0; i < lista.size(); i++) {
+            cServi.addItem(lista.get(i));
+        }
+
     }
 
     /**
@@ -31,8 +44,8 @@ public class deshabilitarServicio extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        btnDeshabilitar = new javax.swing.JButton();
+        cServi = new javax.swing.JComboBox<>();
         btnSalir = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
 
@@ -48,16 +61,20 @@ public class deshabilitarServicio extends javax.swing.JFrame {
         jLabel2.setText("Seleccione un servicio");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, -1, -1));
 
-        jButton1.setText("Deshabilitar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnDeshabilitar.setText("Deshabilitar");
+        btnDeshabilitar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnDeshabilitarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 310, -1, -1));
+        jPanel1.add(btnDeshabilitar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 310, -1, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 120, 160, -1));
+        cServi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cServiActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cServi, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 120, 160, -1));
 
         btnSalir.setText("Salir");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -76,12 +93,26 @@ public class deshabilitarServicio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-    this.dispose();        // TODO add your handling code here:
+        this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_btnSalirActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnDeshabilitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeshabilitarActionPerformed
+        ServicioDaoImp dao = new ServicioDaoImp();
+        String io = (String) cServi.getSelectedItem();
+        
+        if(dao.deshabilitar(io)){
+            JOptionPane.showMessageDialog(null, "Exito al Deshabilitar");
+        }else{
+            JOptionPane.showMessageDialog(null, "Error al Deshabilitar");
+        }
+        
+        
+
+    }//GEN-LAST:event_btnDeshabilitarActionPerformed
+
+    private void cServiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cServiActionPerformed
+        cServi.transferFocus();        // TODO add your handling code here:
+    }//GEN-LAST:event_cServiActionPerformed
 
     /**
      * @param args the command line arguments
@@ -120,9 +151,9 @@ public class deshabilitarServicio extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDeshabilitar;
     private javax.swing.JButton btnSalir;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> cServi;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;

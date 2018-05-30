@@ -53,7 +53,7 @@ public class TrabajadorDaoImp implements ITrabajadorDao {
             PreparedStatement sql = connection.prepareStatement(query);
             sql.setString(1, trabajador.getRut());
             sql.setString(2, trabajador.getNombre());
-            sql.setDate(3, (java.sql.Date)trabajador.getFechaNacimiento());
+            sql.setDate(3, trabajador.getFechaNacimiento());
             sql.setString(4, trabajador.getSexo());
             sql.setString(5, trabajador.getCorreo());
             sql.setString(6, trabajador.getDireccion());
@@ -61,7 +61,7 @@ public class TrabajadorDaoImp implements ITrabajadorDao {
             sql.setString(8, trabajador.getContrasenia());
             sql.setString(9, trabajador.getTipo());
             sql.setString(10, trabajador.getEspecialidad());
-            sql.setBoolean(10, trabajador.isHabilitado());
+            sql.setBoolean(11, trabajador.isHabilitado());
 
             //Si ejecuta, agregamos y cerramos conexión
             if (sql.execute()) {
@@ -83,17 +83,17 @@ public class TrabajadorDaoImp implements ITrabajadorDao {
         try (Connection connection = Conexion.getConexion()) {
             PreparedStatement sql = connection.prepareStatement(query);
                         
-            sql.setString(9, trabajador.getRut());
-            sql.setString(1, trabajador.getNombre());
-            sql.setDate(2, (Date) trabajador.getFechaNacimiento());            
-            sql.setString(3, trabajador.getSexo());
-            sql.setString(4, trabajador.getCorreo());
-            sql.setString(5, trabajador.getDireccion());
-            sql.setString(6, trabajador.getTelefono());            
-            sql.setString(7, trabajador.getContrasenia());
-            sql.setString(8, trabajador.getTipo());
-            sql.setString(9, trabajador.getEspecialidad());
-            sql.setBoolean(8, trabajador.isHabilitado());
+            sql.setString(1, trabajador.getRut());
+            sql.setString(2, trabajador.getNombre());
+            sql.setDate(3, trabajador.getFechaNacimiento());            
+            sql.setString(4, trabajador.getSexo());
+            sql.setString(5, trabajador.getCorreo());
+            sql.setString(6, trabajador.getDireccion());
+            sql.setString(7, trabajador.getTelefono());            
+            sql.setString(8, trabajador.getContrasenia());
+            sql.setString(9, trabajador.getTipo());
+            sql.setString(10, trabajador.getEspecialidad());
+            sql.setBoolean(11, trabajador.isHabilitado());
 
             //executeUpdate para ver si se actualizó una fila
             if (sql.executeUpdate() == 1) {
@@ -108,9 +108,13 @@ public class TrabajadorDaoImp implements ITrabajadorDao {
         return false;
     }
 
-    @Override
+    /**
+     *
+     * @param trabajador
+     * @return
+     */
     //Buscar trabajador por rut
-    public TrabajadorDto buscar(TrabajadorDto trabajador) {
+    public boolean buscars(TrabajadorDto trabajador) {
         String query = "SELECT * FROM trabajador WHERE rut = ?";
         try (Connection connection = Conexion.getConexion()) {
 
@@ -130,6 +134,7 @@ public class TrabajadorDaoImp implements ITrabajadorDao {
                     trabajador.setTipo(results.getString("tipo"));
                     trabajador.setEspecialidad(results.getString("especialidad"));                    
                     trabajador.setHabilitado(results.getBoolean("habilitado"));
+                    return true;
                     
                 }
             } catch (Exception e) {
@@ -143,8 +148,8 @@ public class TrabajadorDaoImp implements ITrabajadorDao {
             log.error("Error al buscar trabajador " + e.getMessage());
         } finally {
             
-            return trabajador;
         }
+        return false;
     }
 
     @Override
@@ -167,6 +172,11 @@ public class TrabajadorDaoImp implements ITrabajadorDao {
             log.error("Error al habilitar trabajador " + e.getMessage());
         }
         return false;
+    }
+
+    @Override
+    public TrabajadorDto buscar(TrabajadorDto obj) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
    
 
