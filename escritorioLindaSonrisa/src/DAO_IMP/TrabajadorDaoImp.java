@@ -178,6 +178,38 @@ public class TrabajadorDaoImp implements ITrabajadorDao {
     public TrabajadorDto buscar(TrabajadorDto obj) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    public boolean iniciar(TrabajadorDto dto){
+        String query="select rut, contraseña from trabajador where rut=? and contraseña=?";
+        try(Connection connection = Conexion.getConexion()){
+            PreparedStatement sql=connection.prepareCall(query);
+            sql.setString(1,dto.getRut());
+            sql.setString(2, dto.getContrasenia());
+            ResultSet rs=sql.executeQuery();
+            while(rs.next()){
+                dto.setRut(rs.getString("rut"));
+                dto.setContrasenia(rs.getString("contraseña"));
+                return true;
+            }
+        }catch(SQLException s){
+             log.error("Error SQL habilitando trabajador " + s.getMessage());
+        }
+        return false;
+    }
+    public String mostrarNombre(TrabajadorDto dto){
+        String query="select nombre from trabajador where rut=?";
+        try(Connection connection = Conexion.getConexion()){
+            PreparedStatement sql=connection.prepareCall(query);
+            sql.setString(1,dto.getRut());
+            ResultSet rs=sql.executeQuery();
+            while(rs.next()){
+                dto.setRut(rs.getString("nombre"));
+                return dto.getNombre();
+            }
+        }catch(SQLException s){
+             log.error("Error SQL habilitando trabajador " + s.getMessage());
+        }
+        return "";
+    }
    
 
 }

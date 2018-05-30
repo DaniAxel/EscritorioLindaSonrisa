@@ -52,8 +52,6 @@ public class DeshabilitarTrabajador extends javax.swing.JFrame {
         btnVerificar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         btnDeshabilitar = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tableResult = new javax.swing.JTable();
         btnSalir = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
@@ -63,7 +61,7 @@ public class DeshabilitarTrabajador extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Rut");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, -1, -1));
 
         jLabel2.setText("Ingrese el rut del Trabajador a deshabilitar");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 326, -1));
@@ -73,7 +71,7 @@ public class DeshabilitarTrabajador extends javax.swing.JFrame {
                 txtRutActionPerformed(evt);
             }
         });
-        jPanel1.add(txtRut, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 50, 158, -1));
+        jPanel1.add(txtRut, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, 158, -1));
 
         btnVerificar.setText("Verificar");
         btnVerificar.addActionListener(new java.awt.event.ActionListener() {
@@ -81,7 +79,7 @@ public class DeshabilitarTrabajador extends javax.swing.JFrame {
                 btnVerificarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnVerificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, -1, -1));
+        jPanel1.add(btnVerificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 140, -1, -1));
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 596, 22));
 
         btnDeshabilitar.setText("Deshabilitar");
@@ -90,27 +88,7 @@ public class DeshabilitarTrabajador extends javax.swing.JFrame {
                 btnDeshabilitarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnDeshabilitar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 50, -1, -1));
-
-        tableResult.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null}
-            },
-            new String [] {
-                "RUT", "NOMBRE", "CORREO", "FECHA_NACIMIENTO", "TELEFONO", "TIPO TRABAJADOR"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(tableResult);
-
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 579, 128));
+        jPanel1.add(btnDeshabilitar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 140, -1, -1));
 
         btnSalir.setText("Salir");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -118,7 +96,7 @@ public class DeshabilitarTrabajador extends javax.swing.JFrame {
                 btnSalirActionPerformed(evt);
             }
         });
-        jPanel1.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 50, -1, -1));
+        jPanel1.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 140, -1, -1));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/mfOAU8I.jpg"))); // NOI18N
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -225,9 +203,7 @@ public class DeshabilitarTrabajador extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable tableResult;
     private javax.swing.JTextField txtRut;
     // End of variables declaration//GEN-END:variables
 }

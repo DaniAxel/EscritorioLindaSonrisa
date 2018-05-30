@@ -151,7 +151,17 @@ public class TrabajadorDto {
 
     @Override
     public String toString() {
-        return "TrabajadorDto{" + "rut=" + rut + ", nombre=" + nombre + ", fechaNacimiento=" + fechaNacimiento + ", sexo=" + sexo +", correo=" + correo + ", direccion=" + direccion + ", telefono=" + telefono + ", contrasenia=" + contrasenia + ", tipo=" + tipo + ", especialidad=" + especialidad + ", habilitado=" + habilitado + '}';
+        return  "Rut=" + rut +
+                 "\n Nombre=" + nombre+ 
+                 "\n FechaNacimiento=" + fechaNacimiento+
+                 "\n sexo=" + sexo +
+                "\n correo=" + correo + ", "+
+                "\n direccion=" + direccion +
+                "\n telefono=" + telefono + 
+                "\n contrasenia=" + contrasenia + 
+                "\n tipo=" + tipo + 
+                "\n especialidad=" + especialidad +
+                "\n habilitado=" + habilitado ;
     }
     
     

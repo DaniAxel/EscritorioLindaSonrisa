@@ -29,7 +29,6 @@ public class principal extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         btnServic = new javax.swing.JButton();
         btnTrabajadore = new javax.swing.JButton();
@@ -42,10 +41,7 @@ public class principal extends javax.swing.JFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setText("Bienvenido");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 30, 149, -1));
-
-        jLabel2.setText("A que servicio desea ingresar");
+        jLabel2.setText("A que Area desea ingresar");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 70, -1, -1));
 
         btnServic.setText("Servicios");
@@ -157,7 +153,6 @@ public class principal extends javax.swing.JFrame {
     private javax.swing.JButton btnServic;
     private javax.swing.JButton btnTrabajadore;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;

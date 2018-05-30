@@ -6,7 +6,10 @@
 package ESCRITORIO;
 
 import BBDD.Conexion;
+import DAO_IMP.TrabajadorDaoImp;
+import DTO.TrabajadorDto;
 import java.sql.*;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -21,7 +24,7 @@ public class inicioSession extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -56,7 +59,18 @@ public class inicioSession extends javax.swing.JFrame {
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 330, -1, -1));
 
         txtUser.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        txtUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUserActionPerformed(evt);
+            }
+        });
         getContentPane().add(txtUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 290, 150, -1));
+
+        txtPass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPassActionPerformed(evt);
+            }
+        });
         getContentPane().add(txtPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 330, 150, -1));
 
         jButton1.setText("Ingresar");
@@ -82,17 +96,35 @@ public class inicioSession extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-    System.exit(0);            // TODO add your handling code here:
+        System.exit(0);            // TODO add your handling code here:
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        TrabajadorDto dto= new TrabajadorDto();
+        TrabajadorDaoImp dao= new TrabajadorDaoImp();
         
-    Conexion cn = new Conexion();
-    Connection cc= cn.getConexion();
-    String nom,contra;
-    String sql;
-    
+        dto.setRut(txtUser.getText());
+        dto.setContrasenia(txtPass.getText());
+        
+        if(dao.iniciar(dto)){
+            JOptionPane.showMessageDialog(null, "Bienvenido ");
+            principal prt= new principal();
+            prt.setVisible(true);
+            this.setVisible(false);
+        }else{
+            JOptionPane.showMessageDialog(null, "User o contraseña invalidos");
+        }
+
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txtUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUserActionPerformed
+        txtUser.transferFocus();        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUserActionPerformed
+
+    private void txtPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPassActionPerformed
+        txtPass.transferFocus();        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPassActionPerformed
 
     /**
      * @param args the command line arguments
