@@ -22,10 +22,8 @@ public class deshabilitarServicio extends javax.swing.JFrame {
     public deshabilitarServicio() {
         initComponents();
         this.setLocationRelativeTo(null);
-        cServi.removeAllItems();
         ServicioDaoImp dao = new ServicioDaoImp();
-        ArrayList<String> lista = new ArrayList<String>();
-        lista = dao.listarNombres();
+        ArrayList<String> lista = dao.listarNombres();
         for (int i = 0; i < lista.size(); i++) {
             cServi.addItem(lista.get(i));
         }

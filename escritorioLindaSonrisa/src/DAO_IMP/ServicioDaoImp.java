@@ -151,6 +151,7 @@ public class ServicioDaoImp implements IServicioDao {
             ResultSet result = sql.executeQuery();
             while (result.next()) {
                 list.add(result.getString("nombre"));
+                
             }
         } catch (SQLException s) {
             log.error("Error SQL listando todos servicio " + s.getMessage());

@@ -195,6 +195,7 @@ public class agregarInsumos extends javax.swing.JFrame {
         txtCantCritic.setEnabled(true);
         txtCantMax.setEnabled(true);
         btnNuevo.setEnabled(true);
+        btnGuardar.setEnabled(true);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

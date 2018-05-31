@@ -261,10 +261,10 @@ public class registroTrabajador extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-
+        //se crean las clases que se van a ocupar en el registro
         TrabajadorDto tr = new TrabajadorDto();
         TrabajadorDaoImp dao = new TrabajadorDaoImp();
-
+        //setteamos los campos para recibir lo que se esta ingresando por ventana
         tr.setRut(t_rut.getText());
         tr.setNombre(t_nom.getText());
         tr.setCorreo(t_corr.getText());
@@ -274,7 +274,8 @@ public class registroTrabajador extends javax.swing.JFrame {
         tr.setTipo(t_tip.getText());
         tr.setContrasenia(t_contra.getText());
         tr.setSexo(txtSexo.getText());
-        java.util.Date utilDate = Dat.getDate();
+        java.util.Date utilDate = Dat.getDate(); //se recive el tipo de dato date y luego se hace crea
+                                                 //una nueva instancia con tipo de dato sql.date
         java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
         tr.setFechaNacimiento(sqlDate);
         if (chkHab.isSelected()) {
