@@ -33,7 +33,8 @@ public class principal extends javax.swing.JFrame {
         btnServic = new javax.swing.JButton();
         btnTrabajadore = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnInsumos = new javax.swing.JButton();
+        btnProveedores = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -50,7 +51,7 @@ public class principal extends javax.swing.JFrame {
                 btnServicActionPerformed(evt);
             }
         });
-        jPanel1.add(btnServic, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 150, -1, -1));
+        jPanel1.add(btnServic, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 150, -1, -1));
 
         btnTrabajadore.setText("Trabajadores");
         btnTrabajadore.addActionListener(new java.awt.event.ActionListener() {
@@ -58,7 +59,7 @@ public class principal extends javax.swing.JFrame {
                 btnTrabajadoreActionPerformed(evt);
             }
         });
-        jPanel1.add(btnTrabajadore, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 150, -1, -1));
+        jPanel1.add(btnTrabajadore, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 150, -1, -1));
 
         btnSalir.setText("Salir");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -68,13 +69,21 @@ public class principal extends javax.swing.JFrame {
         });
         jPanel1.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 250, -1, -1));
 
-        jButton1.setText("Insumos");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnInsumos.setText("Insumos");
+        btnInsumos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnInsumosActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 150, -1, -1));
+        jPanel1.add(btnInsumos, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 150, -1, -1));
+
+        btnProveedores.setText("Proveedores");
+        btnProveedores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProveedoresActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnProveedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 150, 100, -1));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/mfOAU8I.jpg"))); // NOI18N
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 400));
@@ -94,24 +103,34 @@ public class principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnServicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnServicActionPerformed
-    opcServicios srb= new opcServicios();
-    srb.setVisible(true);// TODO add your handling code here:
+        opcServicios srb = new opcServicios();
+        srb.setVisible(true);
+        this.setVisible(false);// TODO add your handling code here:
     }//GEN-LAST:event_btnServicActionPerformed
 
     private void btnTrabajadoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTrabajadoreActionPerformed
-      opcTrabajadores trs= new opcTrabajadores();
-      trs.setVisible(true);// TODO add your handling code here:
+        opcTrabajadores trs = new opcTrabajadores();
+        trs.setVisible(true);
+        this.setVisible(false);// TODO add your handling code here:
     }//GEN-LAST:event_btnTrabajadoreActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-       inicioSession in=new inicioSession();
-       in.setVisible(true);// TODO add your handling code here:
+        inicioSession in = new inicioSession();
+        in.setVisible(true);
+        this.setVisible(false);// TODO add your handling code here:
     }//GEN-LAST:event_btnSalirActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    opcInsumos in=new opcInsumos();
-    in.setVisible(true);// TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnInsumosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsumosActionPerformed
+        opcInsumos in = new opcInsumos();
+        in.setVisible(true);
+        this.setVisible(false);// TODO add your handling code here:
+    }//GEN-LAST:event_btnInsumosActionPerformed
+
+    private void btnProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProveedoresActionPerformed
+        opcProveedores op = new opcProveedores();
+        op.setVisible(true);
+        this.setVisible(false);// TODO add your handling code here:
+    }//GEN-LAST:event_btnProveedoresActionPerformed
 
     /**
      * @param args the command line arguments
@@ -149,10 +168,11 @@ public class principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnInsumos;
+    private javax.swing.JButton btnProveedores;
     private javax.swing.JButton btnSalir;
     private javax.swing.JButton btnServic;
     private javax.swing.JButton btnTrabajadore;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;

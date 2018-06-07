@@ -11,7 +11,7 @@ public class Conexion {
            String driverUrl="jdbc:oracle:thin:@localhost:1521:XE";
            Class.forName(driverClassName);
            connection = DriverManager.getConnection(
-                   driverUrl, "Portafolio1","axel");
+                   driverUrl, "Portafolios","axel");
         }catch (Exception e) {
             e.printStackTrace();
         }

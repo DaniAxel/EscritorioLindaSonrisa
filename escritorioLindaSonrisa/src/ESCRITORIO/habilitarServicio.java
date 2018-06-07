@@ -93,7 +93,9 @@ public class habilitarServicio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bntSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSalirActionPerformed
-        this.dispose();       // TODO add your handling code here:
+        opcServicios ser= new opcServicios();
+        ser.setVisible(true);
+        this.setVisible(false);       // TODO add your handling code here:
     }//GEN-LAST:event_bntSalirActionPerformed
 
     private void btnHabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHabActionPerformed

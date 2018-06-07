@@ -9,6 +9,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -191,24 +192,43 @@ public class TrabajadorDaoImp implements ITrabajadorDao {
                 return true;
             }
         }catch(SQLException s){
-             log.error("Error SQL habilitando trabajador " + s.getMessage());
+             log.error("Error SQL iniciando sesion " + s.getMessage());
         }
         return false;
     }
-    public String mostrarNombre(TrabajadorDto dto){
+    public String mostrarNombre(String rut){
         String query="select nombre from trabajador where rut=?";
         try(Connection connection = Conexion.getConexion()){
             PreparedStatement sql=connection.prepareCall(query);
-            sql.setString(1,dto.getRut());
+            sql.setString(1,rut);
             ResultSet rs=sql.executeQuery();
             while(rs.next()){
+                TrabajadorDto dto= new TrabajadorDto();
                 dto.setRut(rs.getString("nombre"));
-                return dto.getNombre();
+                return rs.getString("nombre");
             }
         }catch(SQLException s){
              log.error("Error SQL habilitando trabajador " + s.getMessage());
         }
         return "";
+    }
+    public ArrayList<String> listarTipos() {
+        String query = "SELECT Distinct tipo FROM trabajador ";
+        ArrayList<String> list = new ArrayList<String>();
+        try (Connection conexion = Conexion.getConexion()) {
+            PreparedStatement sql = conexion.prepareStatement(query);
+            ResultSet result = sql.executeQuery();
+            while (result.next()) {
+                list.add(result.getString("tipo"));
+                
+            }
+        } catch (SQLException s) {
+            log.error("Error SQL listando todos los tipos " + s.getMessage());
+        } catch (Exception e) {
+            log.error("Error al listando todos los tipos " + e.getMessage());
+        }
+        return list;
+
     }
    
 

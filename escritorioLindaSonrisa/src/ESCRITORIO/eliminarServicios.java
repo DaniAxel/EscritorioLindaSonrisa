@@ -100,15 +100,17 @@ public class eliminarServicios extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmVarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmVarActionPerformed
-    cmVar.transferFocus();        // TODO add your handling code here:
+        cmVar.transferFocus();        // TODO add your handling code here:
     }//GEN-LAST:event_cmVarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-    this.dispose();        // TODO add your handling code here:
+        opcServicios ser = new opcServicios();
+        ser.setVisible(true);
+        this.setVisible(false);     // TODO add your handling code here:
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        
+
         ServicioDaoImp dao = new ServicioDaoImp();
         String io = (String) cmVar.getSelectedItem();
 

@@ -73,17 +73,21 @@ public class opcTrabajadores extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarTActionPerformed
-    registroTrabajador tr= new registroTrabajador();
-    tr.setVisible(true);// TODO add your handling code here:
+        registroTrabajador tr = new registroTrabajador();
+        tr.setVisible(true);
+        this.setVisible(false);// TODO add your handling code here:
     }//GEN-LAST:event_btnAgregarTActionPerformed
 
     private void btnDeshabiltiarTraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeshabiltiarTraActionPerformed
-      DeshabilitarTrabajador dt= new DeshabilitarTrabajador();
-      dt.setVisible(true);// TODO add your handling code here:
+        DeshabilitarTrabajador dt = new DeshabilitarTrabajador();
+        dt.setVisible(true);
+        this.setVisible(false);// TODO add your handling code here:
     }//GEN-LAST:event_btnDeshabiltiarTraActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-      this.dispose();  // TODO add your handling code here:
+        principal pr = new principal();
+        pr.setVisible(true);
+        this.setVisible(false);  // TODO add your handling code here:
     }//GEN-LAST:event_btnSalirActionPerformed
 
     /**

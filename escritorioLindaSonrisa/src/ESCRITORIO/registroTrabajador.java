@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
@@ -21,6 +22,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import oracle.net.aso.d;
+import org.apache.commons.codec.digest.DigestUtils;
 
 /**
  *
@@ -34,6 +36,13 @@ public class registroTrabajador extends javax.swing.JFrame {
     public registroTrabajador() {
         initComponents();
         this.setLocationRelativeTo(null);
+        cTr.removeAllItems();
+        TrabajadorDaoImp dao = new TrabajadorDaoImp();
+        ArrayList<String> lista = new ArrayList<String>();
+        lista = dao.listarTipos();
+        for (int i = 0; i < lista.size(); i++) {
+            cTr.addItem(lista.get(i));
+        }
         limpiar();
         bloquear();
     }
@@ -60,7 +69,6 @@ public class registroTrabajador extends javax.swing.JFrame {
         t_nom = new javax.swing.JTextField();
         t_dir = new javax.swing.JTextField();
         t_tel = new javax.swing.JTextField();
-        t_tip = new javax.swing.JTextField();
         btnRegistrar = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -75,6 +83,7 @@ public class registroTrabajador extends javax.swing.JFrame {
         txtSexo = new javax.swing.JTextField();
         chkHab = new javax.swing.JCheckBox();
         Dat = new com.toedter.calendar.JDateChooser();
+        cTr = new javax.swing.JComboBox<>();
         jLabel12 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -131,13 +140,6 @@ public class registroTrabajador extends javax.swing.JFrame {
             }
         });
         jPanel1.add(t_tel, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 200, 113, -1));
-
-        t_tip.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                t_tipActionPerformed(evt);
-            }
-        });
-        jPanel1.add(t_tip, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 110, 113, -1));
 
         btnRegistrar.setText("Registrar");
         btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
@@ -215,6 +217,8 @@ public class registroTrabajador extends javax.swing.JFrame {
         Dat.setDateFormatString("dd-mm-yyyy");
         jPanel1.add(Dat, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 200, -1, -1));
 
+        jPanel1.add(cTr, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 110, 130, -1));
+
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/mfOAU8I.jpg"))); // NOI18N
         jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 400));
 
@@ -239,10 +243,6 @@ public class registroTrabajador extends javax.swing.JFrame {
         t_tel.transferFocus();        // TODO add your handling code here:
     }//GEN-LAST:event_t_telActionPerformed
 
-    private void t_tipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_t_tipActionPerformed
-        t_tip.transferFocus();      // TODO add your handling code here:
-    }//GEN-LAST:event_t_tipActionPerformed
-
     private void t_espActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_t_espActionPerformed
         t_esp.transferFocus();        // TODO add your handling code here:
     }//GEN-LAST:event_t_espActionPerformed
@@ -257,7 +257,9 @@ public class registroTrabajador extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        this.dispose();        // TODO add your handling code here:
+        opcTrabajadores tr = new opcTrabajadores();
+        tr.setVisible(true);
+        this.setVisible(false);// TODO add your handling code here:
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
@@ -271,25 +273,25 @@ public class registroTrabajador extends javax.swing.JFrame {
         tr.setDireccion(t_dir.getText());
         tr.setTelefono(t_tel.getText());
         tr.setEspecialidad(t_esp.getText());
-        tr.setTipo(t_tip.getText());
-        tr.setContrasenia(t_contra.getText());
+        tr.setTipo(cTr.getSelectedItem().toString());
+        tr.setContrasenia(DigestUtils.md5Hex(t_contra.getText()));
         tr.setSexo(txtSexo.getText());
         java.util.Date utilDate = Dat.getDate(); //se recive el tipo de dato date y luego se hace crea
-                                                 //una nueva instancia con tipo de dato sql.date
+        //una nueva instancia con tipo de dato sql.date
         java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
         tr.setFechaNacimiento(sqlDate);
         if (chkHab.isSelected()) {
             tr.setHabilitado(true);
         } else {
             tr.setHabilitado(false);
-
+            
         }
         if (dao.agregar(tr)) {
-                JOptionPane.showMessageDialog(null, "Error al agregar al trabajador");
-            } else {
-                JOptionPane.showMessageDialog(null, "Exito al agregar el Trabajador");
-
-            }
+            JOptionPane.showMessageDialog(null, "Error al agregar al trabajador");
+        } else {
+            JOptionPane.showMessageDialog(null, "Exito al agregar el Trabajador");
+            
+        }
 
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
@@ -315,14 +317,14 @@ public class registroTrabajador extends javax.swing.JFrame {
         t_corr.setText("");
         t_esp.setText("");
         t_tel.setText("");
-        t_tip.setText("");
+        cTr.setSelectedItem("");
         t_contra.setText("");
         txtSexo.setText("");
         chkHab.setSelected(false);
         Dat.setCalendar(null);
-
+        
     }
-
+    
     public void bloquear() {
         t_rut.setEnabled(false);
         t_nom.setEnabled(false);
@@ -331,14 +333,14 @@ public class registroTrabajador extends javax.swing.JFrame {
         t_esp.setEnabled(false);
         t_tel.setEnabled(false);
         txtSexo.setEnabled(false);
-        t_tip.setEnabled(false);
+        cTr.setEnabled(false);
         t_contra.setEnabled(false);
         btnNuevo.setEnabled(true);
         btnRegistrar.setEnabled(false);
         Dat.setEnabled(false);
         chkHab.setEnabled(false);
     }
-
+    
     public void desbloquear() {
         t_rut.setEnabled(true);
         t_nom.setEnabled(true);
@@ -347,14 +349,14 @@ public class registroTrabajador extends javax.swing.JFrame {
         t_corr.setEnabled(true);
         t_esp.setEnabled(true);
         t_tel.setEnabled(true);
-        t_tip.setEnabled(true);
+        cTr.setEnabled(true);
         t_contra.setEnabled(true);
         btnRegistrar.setEnabled(true);
         btnNuevo.setEnabled(true);
         Dat.setEnabled(true);
         chkHab.setEnabled(true);
     }
-
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -393,6 +395,7 @@ public class registroTrabajador extends javax.swing.JFrame {
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JButton btnSalir;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JComboBox<String> cTr;
     private javax.swing.JCheckBox chkHab;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -415,7 +418,6 @@ public class registroTrabajador extends javax.swing.JFrame {
     private javax.swing.JTextField t_nom;
     private javax.swing.JTextField t_rut;
     private javax.swing.JTextField t_tel;
-    private javax.swing.JTextField t_tip;
     private javax.swing.JTextField txtSexo;
     // End of variables declaration//GEN-END:variables
 }

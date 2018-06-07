@@ -90,27 +90,29 @@ public class opcServicios extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarSerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarSerActionPerformed
-    agregarServicios srb= new agregarServicios();
-    srb.setVisible(true);// TODO add your handling code here:
+        agregarServicios srb = new agregarServicios();
+        srb.setVisible(true);// TODO add your handling code here:
     }//GEN-LAST:event_btnAgregarSerActionPerformed
 
     private void btnEliminarServActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarServActionPerformed
-     deshabilitarServicio sr= new deshabilitarServicio();
-     sr.setVisible(true);// TODO add your handling code here:
+        deshabilitarServicio sr = new deshabilitarServicio();
+        sr.setVisible(true);// TODO add your handling code here:
     }//GEN-LAST:event_btnEliminarServActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-     this.dispose();   // TODO add your handling code here:
+        principal pr = new principal();
+        pr.setVisible(true);
+        this.setVisible(false);// TODO add your handling code here:
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnHabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHabActionPerformed
-    habilitarServicio ss=new habilitarServicio();
-    ss.setVisible(true);// TODO add your handling code here:
+        habilitarServicio ss = new habilitarServicio();
+        ss.setVisible(true);// TODO add your handling code here:
     }//GEN-LAST:event_btnHabActionPerformed
 
     private void btnElimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnElimActionPerformed
-    eliminarServicios sr=new eliminarServicios();
-    sr.setVisible(true);// TODO add your handling code here:
+        eliminarServicios sr = new eliminarServicios();
+        sr.setVisible(true);// TODO add your handling code here:
     }//GEN-LAST:event_btnElimActionPerformed
 
     /**

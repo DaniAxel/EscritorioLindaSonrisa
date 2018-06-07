@@ -47,7 +47,7 @@ public class agregarServicios extends javax.swing.JFrame {
         t_precio = new javax.swing.JTextField();
         btnAgregar = new javax.swing.JButton();
         btnNuevo = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnSalir = new javax.swing.JButton();
         t_descripcion = new javax.swing.JTextField();
         chkHab = new javax.swing.JCheckBox();
         jLabel5 = new javax.swing.JLabel();
@@ -98,13 +98,13 @@ public class agregarServicios extends javax.swing.JFrame {
         });
         getContentPane().add(btnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(162, 353, -1, -1));
 
-        jButton1.setText("Salir");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnSalir.setText("Salir");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnSalirActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(433, 353, -1, -1));
+        getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(433, 353, -1, -1));
 
         t_descripcion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -132,9 +132,11 @@ public class agregarServicios extends javax.swing.JFrame {
         limpiar();
     }//GEN-LAST:event_btnNuevoActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        opcServicios ser= new opcServicios();
+        ser.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnSalirActionPerformed
 
     private void t_nomsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_t_nomsActionPerformed
         t_noms.transferFocus();        // TODO add your handling code here:
@@ -242,8 +244,8 @@ ServicioDto dto= new ServicioDto();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnNuevo;
+    private javax.swing.JButton btnSalir;
     private javax.swing.JCheckBox chkHab;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

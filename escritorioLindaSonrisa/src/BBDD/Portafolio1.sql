@@ -8,7 +8,7 @@ create table Cliente(
     direccion varchar(100) not null,
     telefono varchar(20) not null,
     fecha_nacimiento date not null,
-    contraseÃ±a varchar(150)not null,
+    contraseña varchar(150)not null,
     habilitado number(2)not null);               
 
 create  table Insumo (
@@ -33,7 +33,7 @@ create  table Trabajador (
   correo varchar2(50),
   direccion varchar2(100)  NOT NULL,
   telefono varchar2(20)  NOT NULL,
-  contraseÃ±a varchar(100)  NOT NULL,
+  contraseña varchar(100)  NOT NULL,
   tipo varchar2(20)  NOT NULL,
   especialidad varchar(50), 
   habilitado number(1) NOT NULL);
@@ -173,8 +173,8 @@ INSERT INTO Insumo (descripcion,cantidad_actual,cantidad_critica, cantidad_maxim
 INSERT INTO Servicio (nombre,descripcion,precio,habilitado) VALUES ('Ortodoncia', 'La ortodoncia es la ciencia que se encarga del estudio, prevencionn, diagnostico y tratamiento de  las anomalias de forma, posicion, relacion y funcion de las estructuras dentomaxilofaciales.', 15000, 1);
 INSERT INTO Servicio (nombre,descripcion,precio,habilitado) VALUES ('Endodoncia', 'La endodoncia es aquella parte de la odontologia que se ocupa de la etiologia, prevencion,   patologia, diagnostico y tratamiento de las enfermedades de la pulpa dental.', 25000, 1);
 INSERT INTO Servicio (nombre,descripcion,precio,habilitado) VALUES ('Odontologia General', 'Odontologia o Estomatologia es una rama de las ciencias de la salud que se encarga del diagnostico, tratamiento y prevencion de las enfermedades del aparato estomatognitico', 10000, 1);
-INSERT INTO Servicio (nombre,descripcion,precio,habilitado) VALUES ('Odontopediatria', 'Es el odontÃ³logo especializado en la prevenciÃ³n y realizaciÃ³n de procedimientos dentales, generalmente, en niÃ±os de hasta 14 aÃ±os de edad', 15000, 1);
-INSERT INTO Servicio (nombre,descripcion,precio,habilitado) VALUES ('Implantologia', 'Especialista a cargo de reponer piezas dentales perdidas o que estÃ¡n por pasar a ese estado', 25000, 1);
+INSERT INTO Servicio (nombre,descripcion,precio,habilitado) VALUES ('Odontopediatria', 'Es el odontólogo especializado en la prevención y realización de procedimientos dentales, generalmente, en niños de hasta 14 años de edad', 15000, 1);
+INSERT INTO Servicio (nombre,descripcion,precio,habilitado) VALUES ('Implantologia', 'Especialista a cargo de reponer piezas dentales perdidas o que están por pasar a ese estado', 25000, 1);
 
 INSERT INTO Trabajador VALUES ('11.756.660-9', 'Roberto Gonzales Feliciano', '19/02/1987', 'M', 'Roberto.GF@hotmail.com', 'Independencia N1167, Santiago', '9 828273546', '66df9ccc4f5eda4b4fff1a68e3f3dbcd', 'Dentista', 'Odontologia General', 1);
 INSERT INTO Trabajador VALUES ('13.831.883-4', 'Diana Rodriguez Papala', '01/01/1998', 'F', 'DianaR@outlook.com', 'Av. Perez N872, Buin', '9 82937452', '38693b6fab3e37d602488565b8e28736', 'Secretaria', 'null', 1);

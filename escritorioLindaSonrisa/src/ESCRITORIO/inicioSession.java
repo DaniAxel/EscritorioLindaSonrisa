@@ -10,6 +10,7 @@ import DAO_IMP.TrabajadorDaoImp;
 import DTO.TrabajadorDto;
 import java.sql.*;
 import javax.swing.JOptionPane;
+import org.apache.commons.codec.digest.DigestUtils;
 
 /**
  *
@@ -105,10 +106,23 @@ public class inicioSession extends javax.swing.JFrame {
         TrabajadorDaoImp dao= new TrabajadorDaoImp();
         
         dto.setRut(txtUser.getText());
-        dto.setContrasenia(txtPass.getText());
-        
+        dto.setContrasenia(DigestUtils.md5Hex(txtPass.getText()));
+        String nom=dao.mostrarNombre(txtUser.getText());
+//        
+//        if(dto.getRut().equals(txtUser.getText()) && 
+//                dto.getContrasenia().equals(DigestUtils.md5Hex(txtPass.getText()))){
+//            JOptionPane.showMessageDialog(null, "Bienvenido "+dto.getNombre());
+//            principal prt= new principal();
+//            prt.setVisible(true);
+//            this.setVisible(false);
+//            
+//        } else {
+//             JOptionPane.showMessageDialog(null, "User o contraseña invalidos");
+//        }
+//        
         if(dao.iniciar(dto)){
-            JOptionPane.showMessageDialog(null, "Bienvenido ");
+            JOptionPane.showMessageDialog(null, "Bienvenido :"+nom);
+            
             principal prt= new principal();
             prt.setVisible(true);
             this.setVisible(false);

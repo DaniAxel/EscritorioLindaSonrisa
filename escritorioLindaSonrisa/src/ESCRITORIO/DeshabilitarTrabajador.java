@@ -126,7 +126,9 @@ public class DeshabilitarTrabajador extends javax.swing.JFrame {
     }//GEN-LAST:event_txtRutActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        this.dispose();        // TODO add your handling code here:
+        opcTrabajadores op=new opcTrabajadores();
+        op.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnDeshabilitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeshabilitarActionPerformed

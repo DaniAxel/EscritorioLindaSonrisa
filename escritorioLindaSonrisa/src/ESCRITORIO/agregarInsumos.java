@@ -40,7 +40,7 @@ public class agregarInsumos extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         btnGuardar = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnSalir = new javax.swing.JButton();
         txtDes = new javax.swing.JTextField();
         txtCant = new javax.swing.JTextField();
         txtCantCritic = new javax.swing.JTextField();
@@ -76,13 +76,13 @@ public class agregarInsumos extends javax.swing.JFrame {
         });
         getContentPane().add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, -1, -1));
 
-        jButton2.setText("Salir");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnSalir.setText("Salir");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnSalirActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 300, -1, -1));
+        getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 300, -1, -1));
 
         txtDes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -111,9 +111,11 @@ public class agregarInsumos extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        this.dispose();        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        principal pr = new principal();
+        pr.setVisible(true);
+        this.setVisible(false);// TODO add your handling code here:
+    }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         InsumoDto in = new InsumoDto();
@@ -137,7 +139,7 @@ public class agregarInsumos extends javax.swing.JFrame {
     }//GEN-LAST:event_txtDesActionPerformed
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
-      desbloquear();
+        desbloquear();
         limpiar(); // TODO add your handling code here:
     }//GEN-LAST:event_btnNuevoActionPerformed
 
@@ -175,13 +177,15 @@ public class agregarInsumos extends javax.swing.JFrame {
             }
         });
     }
-    public void limpiar(){
+
+    public void limpiar() {
         txtDes.setText("");
         txtCant.setText("");
         txtCantCritic.setText("");
         txtCantMax.setText("");
     }
-    public void bloquear(){
+
+    public void bloquear() {
         txtDes.setEnabled(false);
         txtCant.setEnabled(false);
         txtCantCritic.setEnabled(false);
@@ -189,7 +193,8 @@ public class agregarInsumos extends javax.swing.JFrame {
         btnNuevo.setEnabled(true);
         btnGuardar.setEnabled(false);
     }
-    public void desbloquear(){
+
+    public void desbloquear() {
         txtDes.setEnabled(true);
         txtCant.setEnabled(true);
         txtCantCritic.setEnabled(true);
@@ -201,7 +206,7 @@ public class agregarInsumos extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnNuevo;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
